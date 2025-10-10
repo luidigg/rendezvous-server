@@ -1,0 +1,12 @@
+{
+  "name": "rendezvous-server",
+  "version": "1.0.0",
+  "description": "Servidor de rendezvous P2P para o CrypChat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}
