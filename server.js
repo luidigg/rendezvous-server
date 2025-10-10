@@ -1,7 +1,13 @@
 const WebSocket = require('ws');
 
 const PORT = process.env.PORT || 8080;
-const wss = new WebSocket.Server({ port: PORT, host: '0.0.0.0' });
+const wss = new WebSocket.Server({ 
+    port: PORT, 
+    host: '0.0.0.0',
+    verifyClient: function(info, callback) {
+        callback(true);
+    }
+});
 
 const clients = new Map();
 
