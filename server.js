@@ -1,13 +1,23 @@
+const http = require("http");
 const WebSocket = require("ws");
 
 const PORT = process.env.PORT || 8080;
 
-const peers = new Map();
-
-const wss = new WebSocket.Server({
-    port: PORT,
-    host: "0.0.0.0",
+const server = http.createServer((req, res) => {
+    if (req.method === "HEAD" || req.method === "GET") {
+        res.writeHead(200, { "Content-Type": "text/plain" });
+        res.end("OK");
+    } else {
+        res.writeHead(405);
+        res.end();
+    }
 });
+
+const wss = new WebSocket.Server({ server });
+
+server.listen(PORT, "0.0.0.0");
+
+const peers = new Map();
 
 function safeSend(ws, data) {
     if (ws.readyState === WebSocket.OPEN) {
